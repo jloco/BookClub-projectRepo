@@ -1,0 +1,15 @@
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('FR','France','http://dummyimage.com/229x100.png/5fa2dd/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('CN','China','http://dummyimage.com/156x100.png/ff4444/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('MA','Morocco','http://dummyimage.com/248x100.png/cc0000/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('CN','China','http://dummyimage.com/235x100.png/cc0000/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('JP','Japan','http://dummyimage.com/109x100.png/ff4444/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('IT','Italy','http://dummyimage.com/232x100.png/cc0000/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('CH','Switzerland','http://dummyimage.com/104x100.png/ff4444/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('ID','Indonesia','http://dummyimage.com/120x100.png/ff4444/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('CL','Chile','http://dummyimage.com/213x100.png/5fa2dd/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('ID','Indonesia','http://dummyimage.com/230x100.png/5fa2dd/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('PE','Peru','http://dummyimage.com/215x100.png/dddddd/000000');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('MX','Mexico','http://dummyimage.com/235x100.png/dddddd/000000');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('IN','India','http://dummyimage.com/217x100.png/5fa2dd/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('US','United States','http://dummyimage.com/198x100.png/5fa2dd/ffffff');
+INSERT INTO Countries(country_code,country_name,flag_url) VALUES ('NI','Nigeria','http://dummyimage.com/101x100.png/ff4444/ffffff');
