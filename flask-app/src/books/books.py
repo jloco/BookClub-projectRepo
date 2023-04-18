@@ -13,7 +13,7 @@ def get_books():
     sql = """
     SELECT Books.book_id, Books.title, Books.num_pages, Books.num_chapters, COUNT(Bookshelf.user_id) as readers, AVG(Bookshelf.rating) as average_rating
     FROM Books
-    JOIN Bookshelf ON Books.book_id = Bookshelf.book_id
+    LEFT JOIN Bookshelf ON Books.book_id = Bookshelf.book_id
     GROUP BY Books.book_id
     """
 
@@ -171,3 +171,27 @@ def get_book_like_dislike_counts(bookID):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+@books.route('/books/newbook/', methods=['POST'])
+def add_book(): 
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    book_title = data["title"]
+    book_language = data["language_code"]
+    book_pages = data["num_pages"]
+    book_chapters = data["num_chapters"]
+    book_content = data["content"]
+    
+    #insert data into a SQL statement
+    stmnt = f"INSERT INTO Books (title, language_code, num_chapters, num_pages, content) VALUES ('{book_title}', '{book_language}', '{book_pages}', '{book_chapters}', '{book_content}')"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"

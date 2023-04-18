@@ -34,11 +34,13 @@ def create_app():
     from src.books.books import books
     from src.users.users  import users
     from src.comments.comments  import comments
+    from src.utils.utils  import utils
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views, url_prefix='/v')
     app.register_blueprint(books, url_prefix='/b')
     app.register_blueprint(users, url_prefix='/u')
     app.register_blueprint(comments, url_prefix='/c')
+    app.register_blueprint(utils, url_prefix='/x')
 
     return app
