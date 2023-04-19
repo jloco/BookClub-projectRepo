@@ -30,6 +30,7 @@ def get_comments():
 
     return jsonify(json_data)
 
+
 @comments.route('/comments/<commentID>/', methods=['GET'])
 def get_comment(commentID):
     # get a cursor object from the database
@@ -164,3 +165,71 @@ def get_comment_like_dislike_counts(commentID):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+@comments.route('/comments/', methods=['DELETE'])
+def delete_comment(): 
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    comment_id = data["comment_id"]
+    
+    #insert data into a SQL statement
+    sql = """
+    DELETE FROM Comments WHERE replying_to = {};
+    DELETE FROM Comments WHERE comment_id = {};
+    """.format(comment_id,comment_id)
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    db.get_db().commit()
+
+    return "success"
+
+@comments.route('/comments/', methods=['PUT'])
+def edit_comment(): 
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    comment_id = data["comment_id"]
+    content = data["content"]
+    
+    #insert data into a SQL statement
+    stmnt = f"UPDATE Comments SET content = '{content}' WHERE comment_id = {comment_id}"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@comments.route('/comments/<commentID>/', methods=['POST'])
+def reply_to_comment(commentID):
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    content = data["content"]
+    comment_author = data["comment_author"]
+
+    #get parent book from target comment
+    cursor = db.get_db().cursor()
+    cursor.execute("SELECT parent_book FROM Comments WHERE comment_id = {}".format(commentID))
+    data = cursor.fetchall()
+    print(data)
+
+    #insert data into a SQL statement
+    stmnt = f"INSERT INTO Comments (content, parent_book, comment_author) VALUES ('{content}', '{bookID}', '{comment_author}')"
+
+    # execute SQL statement
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"

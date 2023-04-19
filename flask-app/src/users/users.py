@@ -161,3 +161,57 @@ def get_user_works(userID):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+@users.route('/users/', methods=['POST'])
+def add_user():
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    username = data["username"]
+    first_name = data["first_name"]
+    last_name = data["last_name"]
+    bio = data["bio"]
+    country_code = data["country_code"]
+    company = data["company"]
+    
+    #insert data into a SQL statement
+    stmnt = f"INSERT INTO Users (username,first_name,last_name,bio,country_code,company) VALUES ('{username}', '{first_name}', '{last_name}', '{bio}', '{country_code}', '{company}')"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@users.route('/users/<userID>/username/', methods=['PUT'])
+def change_username(userID):
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    new_username = data["username"]
+    
+    #insert data into a SQL statement
+    stmnt = f"UPDATE Users SET username = {new_username} WHERE user_id = {userID}"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@users.route('/users/<userID>/', methods=['DELETE'])
+def delete_user(userID):
+    
+    #insert data into a SQL statement
+    stmnt = f"DELETE FROM Users WHERE user_id = {userID}"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"

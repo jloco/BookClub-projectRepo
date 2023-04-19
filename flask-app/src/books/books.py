@@ -173,7 +173,27 @@ def get_book_like_dislike_counts(bookID):
     return jsonify(json_data)
 
 
-@books.route('/books/newbook/', methods=['POST'])
+@books.route('/books/<bookID>/comments/', methods=['POST'])
+def add_book_comments(bookID):
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    content = data["content"]
+    comment_author = data["comment_author"]
+    
+    #insert data into a SQL statement
+    stmnt = f"INSERT INTO Comments (content, parent_book, comment_author) VALUES ('{content}', '{bookID}', '{comment_author}')"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@books.route('/books/', methods=['POST'])
 def add_book(): 
 
     #get json data from post
@@ -187,7 +207,49 @@ def add_book():
     book_content = data["content"]
     
     #insert data into a SQL statement
-    stmnt = f"INSERT INTO Books (title, language_code, num_chapters, num_pages, content) VALUES ('{book_title}', '{book_language}', '{book_pages}', '{book_chapters}', '{book_content}')"
+    stmnt = f"INSERT INTO Books (title, language_code, num_chapters, num_pages, content) VALUES ('{book_title}', '{book_language}', '{book_chapters}', '{book_pages}', '{book_content}')"
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@books.route('/books/', methods=['PUT'])
+def update_book(): 
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    book_title = data["title"]
+    book_language = data["language_code"]
+    book_pages = data["num_pages"]
+    book_chapters = data["num_chapters"]
+    book_content = data["content"]
+    
+    #insert data into a SQL statement
+    stmnt = f"UPDATE Books SET title = '{book_title}', language_code = '{book_language}', num_chapters = '{book_chapters}', num_pages = '{book_pages}', content = '{book_content}'     "
+
+    # execute SQL statement
+    cursor = db.get_db().cursor()
+    cursor.execute(stmnt)
+    db.get_db().commit()
+
+    return "success"
+
+@books.route('/books/', methods=['DELETE'])
+def delete_book(): 
+
+    #get json data from post
+    data = request.get_json()
+
+    # load fields from json
+    book_id = data["book_id"]
+    
+    #insert data into a SQL statement
+    stmnt = f"DELETE FROM Books WHERE book_id = {book_id}"
 
     # execute SQL statement
     cursor = db.get_db().cursor()
