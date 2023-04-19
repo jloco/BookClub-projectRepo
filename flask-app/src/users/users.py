@@ -106,7 +106,11 @@ def get_user_reading(userID):
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+
+    if not json_data == []:
+        return jsonify(json_data)
+    else:
+        return "This user is not currently reading a book."
 
 @users.route('/users/<userID>/comments/', methods=['GET'])
 def get_user_comments(userID):
