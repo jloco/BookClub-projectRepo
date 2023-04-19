@@ -11,6 +11,21 @@
     "colName": "BookClub Tests",
     "created": "2023-04-19T05:24:01.442Z",
     "sortNum": 20000,
-    "folders": []
+    "folders": [
+      {
+        "_id": "a73929d7-947e-4e5d-a16c-f82a43124c64",
+        "name": "Users",
+        "containerId": "",
+        "created": "2023-04-19T06:07:09.725Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "5a81a3e3-a15c-4700-b759-70dab9c427a3",
+        "name": "Books",
+        "containerId": "",
+        "created": "2023-04-19T06:50:25.197Z",
+        "sortNum": 20000
+      }
+    ]
   }
 ]

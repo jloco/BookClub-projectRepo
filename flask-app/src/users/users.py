@@ -30,6 +30,9 @@ def get_users():
 
     return jsonify(json_data)
 
+    #return jsonify(json_data)
+
+
 @users.route('/users/<userID>/', methods=['GET'])
 def get_user(userID):
     # get a cursor object from the database
