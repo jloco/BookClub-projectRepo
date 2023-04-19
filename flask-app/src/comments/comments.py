@@ -178,7 +178,6 @@ def delete_comment():
     
     #insert data into a SQL statement
     sql = """
-    DELETE FROM Comments WHERE replying_to = {};
     DELETE FROM Comments WHERE comment_id = {};
     """.format(comment_id,comment_id)
 
