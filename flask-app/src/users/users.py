@@ -135,7 +135,10 @@ def get_user_comments(userID):
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+    if not json_data == []:
+        return jsonify(json_data)
+    else:
+        return "This user hasn't left any comments. "
 
 @users.route('/users/<userID>/works/', methods=['GET'])
 def get_user_works(userID):
