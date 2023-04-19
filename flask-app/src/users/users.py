@@ -197,7 +197,7 @@ def change_username(userID):
     new_username = data["username"]
     
     #insert data into a SQL statement
-    stmnt = f"UPDATE Users SET username = {new_username} WHERE user_id = {userID}"
+    stmnt = f"UPDATE Users SET username = '{new_username}'' WHERE user_id = {userID}"
 
     # execute SQL statement
     cursor = db.get_db().cursor()
