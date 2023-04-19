@@ -68,7 +68,7 @@ CREATE TABLE Comments (
         ON DELETE CASCADE,
     CONSTRAINT comment_reply FOREIGN KEY (replying_to) REFERENCES Comments (comment_id)
         ON UPDATE CASCADE
-        ON DELETE RESTRICT,
+        ON DELETE CASCADE,
     CONSTRAINT comment_author FOREIGN KEY (comment_author) REFERENCES Users (user_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
