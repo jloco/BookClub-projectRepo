@@ -104,7 +104,10 @@ def get_comment_likes(commentID):
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+    if json_data ==[]:
+        return "Comment has no likes. "
+    else:
+        return jsonify(json_data)
 
 @comments.route('/comments/<commentID>/dislikes/', methods=['GET'])
 def get_comment_dislikes(commentID):
@@ -129,7 +132,10 @@ def get_comment_dislikes(commentID):
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+    if json_data ==[]:
+        return "Comment has no dislikes. "
+    else:
+        return jsonify(json_data)
 
 @comments.route('/comments/<commentID>/like-dislike-count/', methods=['GET'])
 def get_comment_like_dislike_counts(commentID):
@@ -167,15 +173,9 @@ def get_comment_like_dislike_counts(commentID):
     return jsonify(json_data)
 
 
-@comments.route('/comments/', methods=['DELETE'])
-def delete_comment(): 
+@comments.route('/comments/<comment_id>', methods=['DELETE'])
+def delete_comment(comment_id): 
 
-    #get json data from post
-    data = request.get_json()
-
-    # load fields from json
-    comment_id = data["comment_id"]
-    
     #insert data into a SQL statement
     sql = """
     DELETE FROM Comments WHERE comment_id = {};
@@ -220,12 +220,12 @@ def reply_to_comment(commentID):
 
     #get parent book from target comment
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT parent_book FROM Comments WHERE comment_id = {}".format(commentID))
+    cursor.execute(''SELECT user_id FROM (SELECT parent_book FROM Comments WHERE comment_id = {}''.format(commentID)))
     data = cursor.fetchall()
     print(data)
 
     #insert data into a SQL statement
-    stmnt = f"INSERT INTO Comments (content, parent_book, comment_author) VALUES ('{content}', '{bookID}', '{comment_author}')"
+    stmnt = f"INSERT INTO Comments (content, parent_book, comment_author) VALUES ('{content}', '{data}', '{comment_author}')"
 
     # execute SQL statement
     cursor.execute(stmnt)
