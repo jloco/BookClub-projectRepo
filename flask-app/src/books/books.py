@@ -85,7 +85,10 @@ def get_book_comments(bookID):
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+    if json_data == []:
+        return "No comments on this book yet. "
+    else:
+        return jsonify(json_data)
 
 @books.route('/books/<bookID>/likes/', methods=['GET'])
 def get_book_likes(bookID):
@@ -109,8 +112,11 @@ def get_book_likes(bookID):
     # the column headers. 
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
+    
+    if json_data == []:
+        return "No likes on this book yet. "
+    else:
+        return jsonify(json_data)
 
 @books.route('/books/<bookID>/dislikes/', methods=['GET'])
 def get_book_dislikes(bookID):
@@ -134,8 +140,11 @@ def get_book_dislikes(bookID):
     # the column headers. 
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
+    
+    if json_data == []:
+        return "No dislikes on this book yet. "
+    else:
+        return jsonify(json_data)
 
 @books.route('/books/<bookID>/like-dislike-count/', methods=['GET'])
 def get_book_like_dislike_counts(bookID):
@@ -239,17 +248,11 @@ def update_book():
 
     return "success"
 
-@books.route('/books/', methods=['DELETE'])
-def delete_book(): 
-
-    #get json data from post
-    data = request.get_json()
-
-    # load fields from json
-    book_id = data["book_id"]
+@books.route('/books/<book_ID>/', methods=['DELETE'])
+def delete_book(book_ID):
     
     #insert data into a SQL statement
-    stmnt = f"DELETE FROM Books WHERE book_id = {book_id}"
+    stmnt = f"DELETE FROM Books WHERE book_id = {book_ID}"
 
     # execute SQL statement
     cursor = db.get_db().cursor()
