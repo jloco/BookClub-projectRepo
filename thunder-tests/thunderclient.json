@@ -42,20 +42,6 @@
     "tests": []
   },
   {
-    "_id": "8e3cdbdc-9ca8-434a-ab9a-bcadc69af2dc",
-    "colId": "92f21690-c682-40ef-9177-d0da6b5e3073",
-    "containerId": "a73929d7-947e-4e5d-a16c-f82a43124c64",
-    "name": "Simple Get",
-    "url": "localhost:8001/",
-    "method": "GET",
-    "sortNum": 20000,
-    "created": "2023-04-19T05:24:09.752Z",
-    "modified": "2023-04-19T06:07:15.622Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
     "_id": "a5c15048-4cfd-44c4-ae74-3c4e06e7e57c",
     "colId": "92f21690-c682-40ef-9177-d0da6b5e3073",
     "containerId": "a73929d7-947e-4e5d-a16c-f82a43124c64",
@@ -983,7 +969,7 @@
     "method": "POST",
     "sortNum": 310000,
     "created": "2023-04-20T05:33:34.242Z",
-    "modified": "2023-04-20T05:34:05.114Z",
+    "modified": "2023-04-20T05:34:47.355Z",
     "headers": [],
     "params": [],
     "body": {
