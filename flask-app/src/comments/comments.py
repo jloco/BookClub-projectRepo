@@ -220,9 +220,9 @@ def reply_to_comment(commentID):
 
     #get parent book from target comment
     cursor = db.get_db().cursor()
-    cursor.execute("SELECT user_id FROM SELECT parent_book FROM Comments WHERE comment_id = {}".format(commentID))
+    cursor.execute("SELECT parent_book FROM Comments WHERE comment_id = {}".format(commentID))
     data = cursor.fetchall()
-    print(data)
+    parent_book = data[0][0]
 
     #insert data into a SQL statement
     stmnt = f"INSERT INTO Comments (content, parent_book, comment_author) VALUES ('{content}', '{parent_book}', '{comment_author}')"
